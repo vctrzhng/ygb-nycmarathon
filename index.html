@@ -63,7 +63,6 @@
       flex-direction: column;
       align-items: center;
       padding: 5rem 1.5rem 0;
-      overflow: hidden;
     }
 
     .hero-text {
@@ -71,6 +70,25 @@
       max-width: 760px;
       position: relative;
       z-index: 2;
+    }
+
+    .hero.hero-bottom {
+      padding-top: 0;
+    }
+
+    /* ── STICKY HERO BAND ── */
+    .hero-sticky {
+      position: sticky;
+      top: var(--nav-h, 72px);
+      z-index: 90;
+      width: calc(100% + 3rem);
+      margin: 0 -1.5rem;
+      padding: 0.5rem 1.5rem 0;
+      background: var(--night);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .eyebrow {
@@ -587,15 +605,11 @@
   <section class="hero">
     <div class="hero-text">
       <p class="eyebrow">New York City Marathon 2026 · You Gotta Believe</p>
-      <h1>Light up <em>NYC</em> for YGB</h1>
-      <p class="hero-sub">Hi everyone! I'm running my first ever marathon through all five boroughs of New York City
-        on November 1, 2026. Every dollar you donate lights up a window on this skyline - and goes to You Gotta
-        Believe, an organization that helps older youth in foster care find permanent families before they age out
-        of the system.</p>
-      <a class="cta-btn" href="https://www.pledge.to/victor-2026-tcs-nyc-marathon-with-team-ygb-9161" target="_blank"
-        rel="noopener">Donate to light a window →</a>
-      <div class="hero-divider"></div>
     </div>
+  </section>
+
+  <div class="hero-sticky" id="hero-sticky">
+    <h1>Light up <em>NYC</em> for YGB</h1>
 
     <div class="stats-bar">
       <div class="stat">
@@ -623,6 +637,18 @@
       </div>
     </div>
     <div class="progress-pct" id="progress-pct">0%</div>
+  </div>
+
+  <section class="hero hero-bottom">
+    <div class="hero-text">
+      <p class="hero-sub">Hi everyone! I'm running my first ever marathon through all five boroughs of New York City
+        on November 1, 2026. Every dollar you donate lights up a window on this skyline - and goes to You Gotta
+        Believe, an organization that helps older youth in foster care find permanent families before they age out
+        of the system.</p>
+      <a class="cta-btn" href="https://www.pledge.to/victor-2026-tcs-nyc-marathon-with-team-ygb-9161" target="_blank"
+        rel="noopener">Donate to light a window →</a>
+      <div class="hero-divider"></div>
+    </div>
   </section>
 
   <div id="skyline-wrap">
@@ -702,7 +728,7 @@
       { order: 12, name: "Sophia Reyes", amount: 10 },
       { order: 13, name: "Priya Patel", amount: 20 },
       { order: 14, name: "Alyssa Carson", amount: 15 },
-      { order: 15, name: "Jill Czarnik", amount: 100 },
+      { order: 15, name: "Kyle Xu", amount: 100 },
       { order: 16, name: "David Edenhoffer", amount: 25 },
       { order: 17, name: "Michael Reese", amount: 50 },
       { order: 18, name: "Jessica Wu", amount: 25 },
@@ -1002,6 +1028,16 @@
     // ─────────────────────────────────────────────
     // INIT
     // ─────────────────────────────────────────────
+    function updateStickyOffset() {
+      const navBar = document.querySelector('.site-header-bar');
+      document.documentElement.style.setProperty('--nav-h', navBar.offsetHeight + 'px');
+    }
+    updateStickyOffset();
+    window.addEventListener('resize', updateStickyOffset);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateStickyOffset);
+    }
+
     buildWindows();
     DONORS.forEach((d, i) => applyDonor(d.name, d.amount, d.order || (i + 1)));
     resize();
