@@ -81,8 +81,7 @@
       position: sticky;
       top: var(--nav-h, 72px);
       z-index: 90;
-      width: calc(100% + 3rem);
-      margin: 0 -1.5rem;
+      width: 100%;
       padding: 0.5rem 1.5rem 0;
       background: var(--night);
       border-bottom: 1px solid var(--border);
@@ -178,6 +177,29 @@
       display: none;
     }
 
+    @media (max-width: 560px) {
+      .stats-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat {
+        padding: 1.25rem 0.5rem;
+      }
+
+      .stat::after {
+        display: none;
+      }
+
+      .stat:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+
+      .stat:nth-child(-n+2) {
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
     .stat-val {
       font-family: var(--sans);
       font-weight: 700;
@@ -200,7 +222,6 @@
       font-size: 10px;
       font-weight: 400;
       color: var(--muted);
-      opacity: 0.65;
       margin-top: 2px;
     }
 
@@ -305,7 +326,7 @@
       padding: 1.75rem;
     }
 
-    .info-card h3 {
+    .info-card h2 {
       font-family: var(--sans);
       font-weight: 700;
       font-size: 1.1rem;
@@ -326,6 +347,7 @@
       margin: 0 auto;
       padding: 4.5rem 1.5rem;
       border-top: 1px solid var(--border);
+      scroll-margin-top: var(--scroll-offset, 392px);
     }
 
     .section-label {
@@ -341,6 +363,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      list-style: none;
     }
 
     .donor-chip {
@@ -351,11 +374,6 @@
       font-family: var(--sans);
       padding: 6px 14px;
       border-radius: 6px;
-    }
-
-    .donor-chip .amount {
-      color: var(--muted);
-      margin-left: 6px;
     }
 
     .empty-note {
@@ -370,6 +388,7 @@
       margin: 0 auto;
       padding: 4.5rem 1.5rem;
       border-top: 1px solid var(--border);
+      scroll-margin-top: var(--scroll-offset, 392px);
     }
 
     .training-intro {
@@ -477,6 +496,36 @@
       text-decoration: none;
     }
 
+    /* ── SCREEN-READER-ONLY TEXT ── */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    /* ── SKIP LINK ── */
+    .skip-link {
+      position: absolute;
+      top: -999px;
+      left: 1rem;
+      z-index: 200;
+      background: var(--gold);
+      color: var(--night);
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
     /* ── SITE HEADER ── */
     .site-header-bar {
       position: sticky;
@@ -566,27 +615,15 @@
       opacity: 0.88;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 620px) {
       .header-nav {
-        gap: 1rem;
-      }
-
-      .header-link {
-        font-size: 12px;
-      }
-
-      .header-countdown {
-        font-size: 12px;
+        display: none;
       }
     }
 
     @media (max-width: 480px) {
       .header-name {
         font-size: 12px;
-      }
-
-      .header-nav {
-        display: none;
       }
 
       .header-countdown {
@@ -603,10 +640,12 @@
 
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <div class="site-header-bar">
     <header class="site-header">
       <span class="header-name">Victor Zheng</span>
-      <nav class="header-nav">
+      <nav class="header-nav" aria-label="Primary">
         <a class="header-link" href="https://www.yougottabelieve.org/" target="_blank" rel="noopener">You Gotta
           Believe</a>
         <a class="header-link" href="#supporters">Supporters</a>
@@ -619,6 +658,8 @@
       </div>
     </header>
   </div>
+
+  <main id="main-content" tabindex="-1">
 
   <section class="hero">
     <div class="hero-text">
@@ -670,8 +711,8 @@
   </section>
 
   <div id="skyline-wrap">
-    <canvas id="skyline-canvas"></canvas>
-    <div class="tooltip" id="tooltip">
+    <canvas id="skyline-canvas" aria-hidden="true" role="presentation"></canvas>
+    <div class="tooltip" id="tooltip" aria-hidden="true">
       <strong id="tt-name"></strong>
       <span id="tt-detail"></span>
     </div>
@@ -679,27 +720,27 @@
 
   <section class="mid-section">
     <div class="info-card">
-      <h3>How it works</h3>
+      <h2>How it works</h2>
       <p>Donate to my page or venmo @victorzheng8. Every dollar lights up a little more of the skyline - the closer
         we get to $7,500, the brighter the city glows.</p>
     </div>
     <div class="info-card">
-      <h3>Why I'm running</h3>
+      <h2>Why I'm running</h2>
       <p>I'm running the New York City Marathon in support of You Gotta Believe, an organization dedicated to finding
         permanent families for older youth in foster care. Their mission is simple but life-changing: every young person
         deserves the love, stability, and belonging of a family.</p>
     </div>
   </section>
 
-  <section class="donor-section" id="supporters">
-    <p class="section-label">The real MVPs, helping me light the skyline</p>
-    <div id="donor-list">
-      <p class="empty-note">Be the first to light a window.</p>
-    </div>
+  <section class="donor-section" id="supporters" tabindex="-1">
+    <h2 class="section-label">The real MVPs, helping me light the skyline</h2>
+    <ul id="donor-list">
+      <li class="empty-note">Be the first to light a window.</li>
+    </ul>
   </section>
 
-  <section class="training-section" id="training">
-    <p class="section-label">Follow my training</p>
+  <section class="training-section" id="training" tabindex="-1">
+    <h2 class="section-label">Follow my training</h2>
     <p class="training-intro">Tracking my miles as I build toward race day.</p>
 
     <div class="training-stats">
@@ -714,12 +755,15 @@
     </div>
 
     <div class="mileage-chart-wrap">
-      <svg class="mileage-svg" id="mileage-svg" viewBox="0 0 880 220"></svg>
+      <svg class="mileage-svg" id="mileage-svg" viewBox="0 0 880 220" aria-hidden="true"></svg>
+      <p class="sr-only" id="mileage-summary"></p>
     </div>
   </section>
 
+  </main>
+
   <footer>
-    Built with ♥ for You Gotta Believe &nbsp;·&nbsp;
+    Built with <span aria-hidden="true">♥</span> for You Gotta Believe &nbsp;·&nbsp;
     <a href="https://www.pledge.to/victor-2026-tcs-nyc-marathon-with-team-ygb-9161" target="_blank">Donate on
       Pledge.to</a>
   </footer>
@@ -739,7 +783,6 @@
       { order: 5, name: "Jenn Gu", amount: 25 },
       { order: 6, name: "George Ahumah", amount: 50 },
       { order: 7, name: "Will O'Brien", amount: 23 },
-      { order: 8, name: "Elizabeth Chen", amount: 1000 },
       { order: 9, name: "Minea Koskinen", amount: 25 },
       { order: 10, name: "Brandon Nguyen", amount: 20 },
       { order: 11, name: "Calvin Zhu", amount: 50 },
@@ -761,7 +804,6 @@
       { order: 27, name: "Phoebe Martin", amount: 25 },
       { order: 28, name: "Cameron McCord", amount: 100 },
       { order: 29, name: "Sebastian Housh", amount: 10 },
-      { order: 30, name: "CVS Health", amount: 2000 },
       { order: 31, name: "Kiana Fithian", amount: 25 },
       { order: 32, name: "Mariana Rios", amount: 10 },
       { order: 33, name: "Jonathan Song", amount: 10 },
@@ -987,10 +1029,10 @@
 
       const list = document.getElementById('donor-list');
       if (DONORS.length === 0) {
-        list.innerHTML = '<p class="empty-note">Be the first to light a window.</p>';
+        list.innerHTML = '<li class="empty-note">Be the first to light a window.</li>';
       } else {
         list.innerHTML = DONORS.map(d =>
-          `<span class="donor-chip">${d.name}<span class="amount">$${d.amount}</span></span>`
+          `<li class="donor-chip">${d.name}</li>`
         ).join('');
       }
     }
@@ -999,8 +1041,32 @@
       document.getElementById('stat-miles-last-month').textContent = MILES_LAST_MONTH;
       document.getElementById('stat-miles-this-month').textContent = MILES_THIS_MONTH;
 
+      // The chart itself is hidden from assistive tech (its in-chart text
+      // labels shrink illegibly on narrow screens and read as a disconnected
+      // jumble out of visual context); this sentence is the accessible
+      // equivalent of the same data.
+      document.getElementById('mileage-summary').textContent = 'Weekly mileage: ' +
+        WEEKLY_MILEAGE.map(w => `week of ${w.week.split('/').slice(0, 2).join('/')}, ${w.miles} miles`).join('; ') + '.';
+
       const n = WEEKLY_MILEAGE.length;
-      const left = 70, right = 850, top = 36, bottom = 165;
+
+      // The SVG's viewBox is fixed (880x220) but its rendered width shrinks on
+      // narrow screens; without this, text/lines sized in viewBox units shrink
+      // along with it (e.g. 12px text rendering at ~4px on a phone). Counter-
+      // scale so on-screen size stays constant regardless of container width.
+      const svgEl = document.getElementById('mileage-svg');
+      const svgScale = Math.max(svgEl.getBoundingClientRect().width / 880, 0.05);
+      const fz = px => +(px / svgScale).toFixed(2);
+
+      // The y-axis tick numbers, rotated axis title, and the last date label
+      // all need a fixed amount of on-screen room; widen the margins (in
+      // viewBox units) when the chart is scaled down so labels don't crowd
+      // the edges or clip off the side. The gaps *between* labels also need
+      // to be counter-scaled (via fz) — otherwise they shrink right along
+      // with everything else and the labels stay just as crowded.
+      const left = Math.max(70, fz(55));
+      const right = Math.min(850, 880 - fz(30));
+      const top = 36, bottom = 165;
 
       const maxMiles = Math.max(...WEEKLY_MILEAGE.map(w => w.miles), 1);
       const niceMax = Math.ceil(maxMiles / 10) * 10;
@@ -1018,37 +1084,65 @@
         const y = bottom - (t / niceMax) * (bottom - top);
         return `
           <line class="mileage-gridline" x1="${left}" y1="${y}" x2="${right}" y2="${y}"></line>
-          <text class="mileage-tick-label" x="${left - 14}" y="${y + 4}" text-anchor="end">${t}</text>
+          <text class="mileage-tick-label" x="${left - fz(16)}" y="${y + 4}" text-anchor="end" style="font-size:${fz(12)}px">${t}</text>
         `;
       }).join('');
 
       const linePoints = points.map(p => `${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(' ');
 
       const dots = points.map(p => `
-        <text class="mileage-value-label" x="${p.x.toFixed(2)}" y="${p.y - 14}" text-anchor="middle">${p.miles.toFixed(1)}</text>
-        <circle class="mileage-dot" cx="${p.x.toFixed(2)}" cy="${p.y.toFixed(2)}" r="4"></circle>
-        <text class="mileage-date-label" x="${p.x.toFixed(2)}" y="${bottom + 24}" text-anchor="middle">${p.week}</text>
+        <text class="mileage-value-label" x="${p.x.toFixed(2)}" y="${p.y - 14}" text-anchor="middle" style="font-size:${fz(12)}px">${p.miles.toFixed(1)}</text>
+        <circle class="mileage-dot" cx="${p.x.toFixed(2)}" cy="${p.y.toFixed(2)}" r="${fz(4)}"></circle>
+        <text class="mileage-date-label" x="${p.x.toFixed(2)}" y="${bottom + 24}" text-anchor="middle" style="font-size:${fz(12)}px">${p.week}</text>
       `).join('');
 
       const midY = (top + bottom) / 2;
       const midX = (left + right) / 2;
 
+      // At small scale, the counter-scaled font needed to stay readable makes
+      // the rotated "Miles run (mi)" label physically longer than the chart
+      // is tall, so it gets clipped by the SVG's viewport. Below that point,
+      // drop it rather than show truncated text — the y-axis is still
+      // labeled via the surrounding "miles ran/run" copy and tick numbers.
+      const yAxisTitle = svgScale >= 0.55
+        ? `<text class="mileage-axis-title" x="${left - fz(45)}" y="${midY}" text-anchor="middle" style="font-size:${fz(11)}px"
+            transform="rotate(-90 ${left - fz(45)} ${midY})">Miles run (mi)</text>`
+        : '';
+
       document.getElementById('mileage-svg').innerHTML = `
         ${gridlines}
-        <polyline class="mileage-line" points="${linePoints}"></polyline>
+        <polyline class="mileage-line" points="${linePoints}" style="stroke-width:${fz(2)}px"></polyline>
         ${dots}
-        <text class="mileage-axis-title" x="22" y="${midY}" text-anchor="middle"
-          transform="rotate(-90 22 ${midY})">Miles run (mi)</text>
-        <text class="mileage-axis-title" x="${midX}" y="${bottom + 50}" text-anchor="middle">Week beginning</text>
+        ${yAxisTitle}
+        <text class="mileage-axis-title" x="${midX}" y="${bottom + 50}" text-anchor="middle" style="font-size:${fz(11)}px">Week beginning</text>
       `;
     }
+
+    // ─────────────────────────────────────────────
+    // A11Y: move focus to the target section on in-page
+    // anchor navigation, so keyboard/screen-reader users get
+    // the same "you've arrived" context sighted users get from
+    // the scroll. preventScroll avoids fighting the smooth-scroll
+    // the browser already performs for the hash navigation.
+    // ─────────────────────────────────────────────
+    function focusHashTarget() {
+      if (!location.hash) return;
+      const target = document.querySelector(location.hash);
+      if (target) target.focus({ preventScroll: true });
+    }
+    window.addEventListener('hashchange', focusHashTarget);
 
     // ─────────────────────────────────────────────
     // INIT
     // ─────────────────────────────────────────────
     function updateStickyOffset() {
       const navBar = document.querySelector('.site-header-bar');
+      const heroSticky = document.getElementById('hero-sticky');
       document.documentElement.style.setProperty('--nav-h', navBar.offsetHeight + 'px');
+      // Anchor-jump targets (#supporters, #training) need to land below both
+      // sticky bands, not at the very top of the viewport, or their heading
+      // and first row of content render hidden underneath them.
+      document.documentElement.style.setProperty('--scroll-offset', (navBar.offsetHeight + heroSticky.offsetHeight) + 'px');
     }
     updateStickyOffset();
     window.addEventListener('resize', updateStickyOffset);
@@ -1062,6 +1156,7 @@
     window.addEventListener('resize', resize);
     updateUI();
     renderTraining();
+    window.addEventListener('resize', renderTraining);
 
     const RACE_DATE = new Date('2026-11-01T00:00:00');
     const daysLeft = Math.ceil((RACE_DATE - new Date()) / (1000 * 60 * 60 * 24));
