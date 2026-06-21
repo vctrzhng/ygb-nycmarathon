@@ -812,6 +812,9 @@
       { order: 36, name: "Jacquelyn de Villiers", amount: 25 },
       { order: 37, name: "Kelli Cruz", amount: 50 },
       { order: 38, name: "Benjamin Rome", amount: 100 },
+      { order: 39, name: "Wendy Wu", amount: 25 },
+      { order: 40, name: "Elizabeth Chen", amount: 1000, hidden: true },
+      { order: 41, name: "CVS", amount: 2000, hidden: true },
       // { order: 1, name: "Sarah K.", amount: 100 },
       // { order: 2, name: "Mike T.", amount: 50 },
       // { order: 3, name: "The Chen Family", amount: 250 },
@@ -1028,10 +1031,11 @@
       document.getElementById('progress-pct').textContent = pct + '%';
 
       const list = document.getElementById('donor-list');
-      if (DONORS.length === 0) {
+      const visibleDonors = DONORS.filter(d => !d.hidden);
+      if (visibleDonors.length === 0) {
         list.innerHTML = '<li class="empty-note">Be the first to light a window.</li>';
       } else {
-        list.innerHTML = DONORS.map(d =>
+        list.innerHTML = visibleDonors.map(d =>
           `<li class="donor-chip">${d.name}</li>`
         ).join('');
       }
@@ -1151,7 +1155,7 @@
     }
 
     buildWindows();
-    DONORS.forEach((d, i) => applyDonor(d.name, d.amount, d.order || (i + 1)));
+    DONORS.forEach((d, i) => applyDonor(d.hidden ? 'Anonymous donor' : d.name, d.amount, d.order || (i + 1)));
     resize();
     window.addEventListener('resize', resize);
     updateUI();
