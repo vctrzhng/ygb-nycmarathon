@@ -4,11 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FBF7F1" />
   <title>victor-ygbmarathon</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -17,29 +18,29 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      transition: text-shadow 0.25s ease;
-    }
-
-    h1:hover:not(:has(:hover)),
-    em:hover:not(:has(:hover)),
-    h3:hover:not(:has(:hover)),
-    p:hover:not(:has(:hover)),
-    span:hover:not(:has(:hover)),
-    a:hover:not(:has(:hover)),
-    footer:hover:not(:has(:hover)),
-    .progress-pct:hover:not(:has(:hover)) {
-      text-shadow: 0 0 4px currentColor;
     }
 
     :root {
-      --night: #07101f;
-      --deep: #0d1a30;
-      --gold: #f5c842;
-      --gold-dim: #c49a20;
+      /* Warm editorial palette — matches victorzheng.com */
+      --bg:           #FBF7F1;
+      --surface:      #F2ECE2;
+      --ink:          #2A2521;
+      --text:         #5C5347;
+      --muted:        #8C8175;
+      --faint:        #A89C8D;
+      --line:         #E8E0D5;
+      --accent:       #3F5267;
+      --accent-deep:  #2D3C4D;
+
+      /* Kept dark — used only by the night skyline panel's tooltip */
+      --deep:  #0d1a30;
       --white: #f5f0e8;
-      --muted: rgba(245, 240, 232, 0.55);
-      --border: rgba(245, 240, 232, 0.1);
-      --sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+      --font-display: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+      --font-body:    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono:    ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+      --sans: var(--font-body);
+      --radius: 10px;
     }
 
     html {
@@ -47,13 +48,14 @@
     }
 
     body {
-      background: var(--night);
-      color: var(--white);
-      font-family: var(--sans);
-      font-size: 18px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
       line-height: 1.7;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     /* ── HERO ── */
@@ -86,54 +88,53 @@
     }
 
     .eyebrow {
+      font-family: var(--font-mono);
       font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
+      letter-spacing: 0.06em;
+      color: var(--faint);
       margin-bottom: 1.25rem;
     }
 
     h1 {
-      font-family: var(--sans);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      font-size: clamp(2.4rem, 6.5vw, 4.6rem);
+      font-family: var(--font-display);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      font-size: clamp(2.2rem, 6vw, 3.6rem);
       line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
     }
 
     h1 em {
-      color: var(--gold);
+      color: var(--accent);
       font-style: normal;
     }
 
     .hero-sub {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 400;
-      color: var(--muted);
+      color: var(--text);
       max-width: 580px;
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 2rem;
       line-height: 1.7;
     }
 
     .cta-btn {
       display: inline-block;
-      background: var(--gold);
-      color: var(--night);
-      font-family: var(--sans);
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--font-body);
       font-size: 14px;
       font-weight: 600;
       padding: 14px 30px;
-      border-radius: 8px;
+      border-radius: 999px;
       text-decoration: none;
-      transition: opacity 0.15s;
+      transition: background-color 0.15s ease;
       margin-bottom: 2.25rem;
     }
 
     .cta-btn:hover {
-      opacity: 0.88;
+      background: var(--accent-deep);
     }
 
     /* ── STATS BAR ── */
@@ -144,9 +145,9 @@
       gap: 0;
       width: 100%;
       max-width: 880px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       position: relative;
       z-index: 2;
     }
@@ -165,7 +166,7 @@
       bottom: 22%;
       right: 0;
       width: 1px;
-      background: var(--border);
+      background: var(--line);
     }
 
     .stat:last-child::after {
@@ -187,24 +188,25 @@
       }
 
       .stat:nth-child(odd) {
-        border-right: 1px solid var(--border);
+        border-right: 1px solid var(--line);
       }
 
       .stat:nth-child(-n+2) {
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--line);
       }
     }
 
     .stat-val {
-      font-family: var(--sans);
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-weight: 500;
       font-size: 1.6rem;
-      color: var(--white);
+      color: var(--ink);
       display: block;
       line-height: 1.2;
     }
 
     .stat-label {
+      font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 500;
       color: var(--muted);
@@ -232,14 +234,14 @@
 
     .progress-track {
       height: 3px;
-      background: var(--border);
+      background: var(--line);
       overflow: hidden;
       margin-top: -1px;
     }
 
     .progress-fill {
       height: 100%;
-      background: var(--gold);
+      background: var(--accent);
       transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -250,19 +252,24 @@
       width: fit-content;
       font-size: 13px;
       font-weight: 600;
-      color: var(--gold);
-      background: rgba(245, 200, 66, 0.08);
+      color: var(--accent);
+      background: rgba(63, 82, 103, 0.08);
       border-radius: 999px;
       position: relative;
       z-index: 2;
     }
 
-    /* ── SKYLINE CANVAS ── */
+    /* ── SKYLINE CANVAS ──
+       Stays a dark night panel (it's a literal lit-up-at-night skyline);
+       framed like a photo card so it reads as a panel within the page. */
     #skyline-wrap {
       width: 100%;
       max-width: 1000px;
       margin: 0 auto;
       position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
     }
 
     #skyline-canvas {
@@ -273,7 +280,7 @@
     .tooltip {
       position: absolute;
       background: var(--deep);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(245, 240, 232, 0.14);
       border-radius: 8px;
       padding: 8px 12px;
       font-size: 12px;
@@ -291,7 +298,7 @@
     }
 
     .tooltip span {
-      color: var(--muted);
+      color: rgba(245, 240, 232, 0.6);
       font-family: var(--sans);
       font-weight: 500;
       font-size: 11px;
@@ -305,7 +312,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
     }
 
     @media (max-width: 520px) {
@@ -316,23 +323,24 @@
     }
 
     .info-card {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 1.75rem;
     }
 
     .info-card h2 {
-      font-family: var(--sans);
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-weight: 500;
       font-size: 1.1rem;
       margin-bottom: 0.75rem;
-      color: var(--white);
+      color: var(--ink);
     }
 
     .info-card p {
       font-size: 14px;
       font-weight: 400;
-      color: var(--muted);
+      color: var(--text);
       line-height: 1.7;
     }
 
@@ -341,17 +349,28 @@
       max-width: 920px;
       margin: 0 auto;
       padding: 4.5rem 1.5rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
       scroll-margin-top: var(--scroll-offset, 72px);
     }
 
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 1.5rem;
+    }
+
     .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 16px;
       color: var(--muted);
-      margin-bottom: 1.25rem;
+    }
+
+    .rule {
+      height: 1px;
+      flex: 1;
+      background: var(--line);
     }
 
     #donor-list {
@@ -362,8 +381,9 @@
     }
 
     .donor-chip {
-      background: rgba(245, 200, 66, 0.08);
-      color: var(--gold);
+      background: rgba(63, 82, 103, 0.08);
+      border: 1px solid rgba(63, 82, 103, 0.18);
+      color: var(--accent-deep);
       font-size: 13px;
       font-weight: 500;
       font-family: var(--sans);
@@ -382,7 +402,7 @@
       max-width: 920px;
       margin: 0 auto;
       padding: 4.5rem 1.5rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
       scroll-margin-top: var(--scroll-offset, 72px);
     }
 
@@ -400,22 +420,24 @@
     }
 
     .training-stat {
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 1.5rem 1.75rem;
     }
 
     .training-stat-val {
       display: block;
-      font-family: var(--sans);
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-weight: 500;
       font-size: 1.8rem;
-      color: var(--white);
+      color: var(--ink);
       line-height: 1.2;
     }
 
     .training-stat-label {
-      font-size: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
       font-weight: 500;
       color: var(--muted);
     }
@@ -432,20 +454,20 @@
     }
 
     .mileage-gridline {
-      stroke: var(--border);
+      stroke: var(--line);
       stroke-width: 1;
     }
 
     .mileage-line {
       fill: none;
-      stroke: var(--gold);
+      stroke: var(--accent);
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
     .mileage-dot {
-      fill: var(--gold);
+      fill: var(--accent);
     }
 
     .mileage-tick-label,
@@ -456,7 +478,7 @@
     }
 
     .mileage-value-label {
-      fill: var(--gold);
+      fill: var(--accent);
       font-size: 12px;
       font-weight: 600;
     }
@@ -479,7 +501,7 @@
     footer {
       text-align: center;
       padding: 3rem 1.5rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--line);
       font-size: 13px;
       font-weight: 400;
       color: var(--muted);
@@ -487,8 +509,13 @@
     }
 
     footer a {
-      color: var(--gold);
+      color: var(--accent);
       text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    footer a:hover {
+      color: var(--accent-deep);
     }
 
     /* ── SCREEN-READER-ONLY TEXT ── */
@@ -507,9 +534,9 @@
       top: -999px;
       left: 1rem;
       z-index: 200;
-      background: var(--gold);
-      color: var(--night);
-      font-family: var(--sans);
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--font-body);
       font-size: 14px;
       font-weight: 600;
       padding: 10px 18px;
@@ -526,8 +553,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--night);
-      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: saturate(120%) blur(6px);
+      border-bottom: 1px solid var(--line);
     }
 
     .site-header {
@@ -550,14 +578,15 @@
     .hero-divider {
       width: 64px;
       height: 1px;
-      background: var(--border);
+      background: var(--line);
       margin: 0 auto 2.75rem;
     }
 
     .header-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--ink);
     }
 
     .header-nav {
@@ -581,33 +610,35 @@
       color: var(--muted);
       text-decoration: none;
       white-space: nowrap;
+      transition: color 0.15s ease;
     }
 
     .header-link:hover {
-      color: var(--gold);
+      color: var(--accent);
     }
 
     .header-countdown {
+      font-family: var(--font-mono);
       font-size: 13px;
       font-weight: 600;
-      color: var(--gold);
+      color: var(--accent);
       white-space: nowrap;
     }
 
     .header-donate {
       display: inline-block;
-      background: var(--gold);
-      color: var(--night);
+      background: var(--accent);
+      color: var(--bg);
       font-size: 13px;
       font-weight: 600;
       padding: 8px 18px;
       border-radius: 999px;
       text-decoration: none;
-      transition: opacity 0.15s;
+      transition: background-color 0.15s ease;
     }
 
     .header-donate:hover {
-      opacity: 0.88;
+      background: var(--accent-deep);
     }
 
     @media (max-width: 620px) {
@@ -728,14 +759,20 @@
   </section>
 
   <section class="donor-section" id="supporters" tabindex="-1">
-    <h2 class="section-label">The real MVPs, helping me light the skyline</h2>
+    <div class="section-head">
+      <h2 class="section-label">The real MVPs, helping me light the skyline</h2>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
     <ul id="donor-list">
       <li class="empty-note">Be the first to light a window.</li>
     </ul>
   </section>
 
   <section class="training-section" id="training" tabindex="-1">
-    <h2 class="section-label">Follow my training</h2>
+    <div class="section-head">
+      <h2 class="section-label">Follow my training</h2>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
     <p class="training-intro">Tracking my miles as I build toward race day.</p>
 
     <div class="training-stats">
