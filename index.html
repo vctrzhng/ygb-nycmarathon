@@ -810,7 +810,7 @@
       { order: 2, name: "Andy Li", amount: 25 },
       { order: 3, name: "Caroline O'Meara", amount: 50 },
       { order: 4, name: "Greg Beutler", amount: 250 },
-      { order: 5, name: "Jenn Gu", amount: 25 },
+      { order: 5, name: "Jenn Gu", amount: 25, hidden: true, excludeFromCount: true },
       { order: 6, name: "George Ahumah", amount: 50 },
       { order: 7, name: "Will O'Brien", amount: 23 },
       { order: 9, name: "Minea Koskinen", amount: 25 },
@@ -820,8 +820,8 @@
       { order: 13, name: "Priya Patel", amount: 20 },
       { order: 14, name: "Alyssa Carson", amount: 15 },
       { order: 15, name: "Kyle Xu", amount: 100 },
-      { order: 16, name: "David Edenhoffer", amount: 25 },
-      { order: 17, name: "Michael Reese", amount: 50 },
+      { order: 16, name: "David Edenhoffer", amount: 25, hidden: true, excludeFromCount: true },
+      { order: 17, name: "Michael Reese", amount: 50, hidden: true, excludeFromCount: true },
       { order: 18, name: "Jessica Wu", amount: 25 },
       { order: 19, name: "Tetiana Tyshchenko", amount: 100 },
       { order: 20, name: "Daniel Kim", amount: 50 },
@@ -829,7 +829,7 @@
       { order: 22, name: "Kate Morgan", amount: 25 },
       { order: 23, name: "Anna Weavers", amount: 25 },
       { order: 24, name: "Connor Sharp", amount: 50 },
-      { order: 25, name: "Zach Whitman", amount: 75 },
+      { order: 25, name: "Zach Whitman", amount: 75, hidden: true, excludeFromCount: true },
       { order: 26, name: "Jason Cook", amount: 200 },
       { order: 27, name: "Phoebe Martin", amount: 25 },
       { order: 28, name: "Cameron McCord", amount: 100, hidden: true },
@@ -1055,7 +1055,7 @@
       document.getElementById('stat-windows').textContent = litCount;
       document.getElementById('stat-windows-remaining').textContent =
         Math.max(0, allWindows.length - litCount).toLocaleString() + ' left';
-      document.getElementById('stat-donors').textContent = DONORS.length;
+      document.getElementById('stat-donors').textContent = DONORS.filter(d => !d.excludeFromCount).length;
       const pct = Math.min(100, Math.round(raised / GOAL * 100));
       document.getElementById('progress-fill').style.width = pct + '%';
       document.getElementById('progress-pct').textContent = pct + '%';
