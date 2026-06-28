@@ -262,13 +262,17 @@
     /* ── SKYLINE CANVAS ──
        Stays a dark night panel (it's a literal lit-up-at-night skyline);
        framed like a photo card so it reads as a panel within the page. */
+    .skyline-panel {
+      width: 100%;
+      background: linear-gradient(to bottom, var(--bg) 0%, #060f1d 14%, #060f1d 86%, var(--bg) 100%);
+      padding: 5rem 0;
+    }
+
     #skyline-wrap {
       width: 100%;
       max-width: 1000px;
       margin: 0 auto;
       position: relative;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
       overflow: hidden;
     }
 
@@ -757,11 +761,13 @@
     </ul>
   </section>
 
-  <div id="skyline-wrap">
-    <canvas id="skyline-canvas" aria-hidden="true" role="presentation"></canvas>
-    <div class="tooltip" id="tooltip" aria-hidden="true">
-      <strong id="tt-name"></strong>
-      <span id="tt-detail"></span>
+  <div class="skyline-panel">
+    <div id="skyline-wrap">
+      <canvas id="skyline-canvas" aria-hidden="true" role="presentation"></canvas>
+      <div class="tooltip" id="tooltip" aria-hidden="true">
+        <strong id="tt-name"></strong>
+        <span id="tt-detail"></span>
+      </div>
     </div>
   </div>
 
