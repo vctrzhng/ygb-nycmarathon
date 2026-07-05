@@ -786,7 +786,7 @@
     <div class="training-stats">
       <div class="training-stat">
         <span class="training-stat-val" id="stat-miles-last-month">0</span>
-        <span class="training-stat-label">miles ran last month</span>
+        <span class="training-stat-label">cumulative miles run</span>
       </div>
       <div class="training-stat">
         <span class="training-stat-val" id="stat-miles-this-month">0</span>
@@ -878,7 +878,6 @@
     // (week beginning date, total miles that week) — add a new
     // row each week, leave miles as 0 until that week is logged
     // ═══════════════════════════════════════════════════════════
-    const MILES_LAST_MONTH = 52.3;
     const MILES_THIS_MONTH = 16.5;
     const WEEKLY_MILEAGE = [
       { week: "5/31/26", miles: 10.47 },
@@ -1114,7 +1113,8 @@
     }
 
     function renderTraining() {
-      document.getElementById('stat-miles-last-month').textContent = MILES_LAST_MONTH;
+      const cumulativeMiles = WEEKLY_MILEAGE.reduce((sum, w) => +(sum + w.miles).toFixed(2), 0);
+      document.getElementById('stat-miles-last-month').textContent = cumulativeMiles;
       document.getElementById('stat-miles-this-month').textContent = MILES_THIS_MONTH;
 
       // The chart itself is hidden from assistive tech (its in-chart text
