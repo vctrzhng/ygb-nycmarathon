@@ -1113,8 +1113,8 @@
     }
 
     function renderTraining() {
-      const cumulativeMiles = WEEKLY_MILEAGE.reduce((sum, w) => +(sum + w.miles).toFixed(2), 0);
-      document.getElementById('stat-miles-last-month').textContent = cumulativeMiles;
+      const cumulativeMiles = WEEKLY_MILEAGE.reduce((sum, w) => sum + w.miles, 0);
+      document.getElementById('stat-miles-last-month').textContent = (Math.ceil(cumulativeMiles * 10) / 10).toFixed(1);
       document.getElementById('stat-miles-this-month').textContent = MILES_THIS_MONTH;
 
       // The chart itself is hidden from assistive tech (its in-chart text
