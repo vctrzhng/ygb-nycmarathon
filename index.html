@@ -508,6 +508,92 @@
       }
     }
 
+    /* ── STRAVA LOG ── */
+    .strava-log {
+      margin-top: 2.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .strava-log-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .strava-log-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .strava-follow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: #FC4C02;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: opacity 0.15s;
+    }
+
+    .strava-follow:hover {
+      opacity: 0.7;
+    }
+
+    .strava-activities {
+      list-style: none;
+    }
+
+    .strava-activity {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .strava-activities li:first-child {
+      border-top: 1px solid var(--line);
+    }
+
+    .strava-activity-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .strava-activity-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .strava-activity-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--faint);
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+
+    .strava-activity-stats {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .strava-dot {
+      color: var(--line);
+    }
+
     /* ── FOOTER ── */
     footer {
       text-align: center;
@@ -797,6 +883,42 @@
     <div class="mileage-chart-wrap">
       <svg class="mileage-svg" id="mileage-svg" viewBox="0 0 880 220" aria-hidden="true"></svg>
       <p class="sr-only" id="mileage-summary"></p>
+    </div>
+
+    <div class="strava-log">
+      <div class="strava-log-head">
+        <span class="strava-log-label">Recent runs</span>
+        <a class="strava-follow" href="https://www.strava.com/athletes/128102122" target="_blank" rel="noopener">Follow on Strava →</a>
+      </div>
+      <ul class="strava-activities">
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">dead but no heat today</span>
+            <span class="strava-activity-date">Jul 5</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>10.01 mi</span><span class="strava-dot">·</span><span>1h 39m</span><span class="strava-dot">·</span><span>9:56 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">So hot</span>
+            <span class="strava-activity-date">Jul 2</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>3.20 mi</span><span class="strava-dot">·</span><span>32m</span><span class="strava-dot">·</span><span>10:06 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Theo von workout</span>
+            <span class="strava-activity-date">Jul 1</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>3.03 mi</span><span class="strava-dot">·</span><span>30m</span><span class="strava-dot">·</span><span>9:51 /mi</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 
