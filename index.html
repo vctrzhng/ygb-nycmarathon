@@ -893,6 +893,69 @@
       <ul class="strava-activities">
         <li class="strava-activity">
           <div class="strava-activity-top">
+            <span class="strava-activity-name">Cooldown Run</span>
+            <span class="strava-activity-meta">Aug 15 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>3.25 mi</span><span class="strava-dot">·</span><span>34m</span><span class="strava-dot">·</span><span>10:22 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Morning Run</span>
+            <span class="strava-activity-meta">Aug 15 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>15.56 mi</span><span class="strava-dot">·</span><span>2h 29m</span><span class="strava-dot">·</span><span>9:33 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Evening Run</span>
+            <span class="strava-activity-meta">Aug 13 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>4.30 mi</span><span class="strava-dot">·</span><span>42m</span><span class="strava-dot">·</span><span>9:43 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Evening Run</span>
+            <span class="strava-activity-meta">Aug 12 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>6.01 mi</span><span class="strava-dot">·</span><span>58m</span><span class="strava-dot">·</span><span>9:41 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Morning Run</span>
+            <span class="strava-activity-meta">Aug 8 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>9.37 mi</span><span class="strava-dot">·</span><span>1h 25m</span><span class="strava-dot">·</span><span>9:02 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Evening Run</span>
+            <span class="strava-activity-meta">Aug 6 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>3.17 mi</span><span class="strava-dot">·</span><span>28m</span><span class="strava-dot">·</span><span>8:43 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
+            <span class="strava-activity-name">Evening Run</span>
+            <span class="strava-activity-meta">Aug 5 · New York, NY</span>
+          </div>
+          <div class="strava-activity-stats">
+            <span>3.07 mi</span><span class="strava-dot">·</span><span>30m</span><span class="strava-dot">·</span><span>9:44 /mi</span>
+          </div>
+        </li>
+        <li class="strava-activity">
+          <div class="strava-activity-top">
             <span class="strava-activity-name">Morning Run</span>
             <span class="strava-activity-meta">Aug 1 · New York, NY</span>
           </div>
@@ -1082,7 +1145,7 @@
     // (week beginning date, total miles that week) — add a new
     // row each week, leave miles as 0 until that week is logged
     // ═══════════════════════════════════════════════════════════
-    const MILES_THIS_MONTH = 14.04;
+    const MILES_THIS_MONTH = 58.77;
     const WEEKLY_MILEAGE = [
       { week: "5/31/26", miles: 10.47 },
       { week: "6/7/26", miles: 15.2 },
@@ -1093,6 +1156,8 @@
       { week: "7/12/26", miles: 14.9 },
       { week: "7/19/26", miles: 19.8 },
       { week: "7/26/26", miles: 18.16 },
+      { week: "8/2/26", miles: 15.61 },
+      { week: "8/9/26", miles: 29.12 },
     ];
 
     // ─────────────────────────────────────────────
@@ -1330,7 +1395,7 @@
       // jumble out of visual context); this sentence is the accessible
       // equivalent of the same data.
       document.getElementById('mileage-summary').textContent = 'Weekly mileage: ' +
-        WEEKLY_MILEAGE.map(w => `week of ${w.week.split('/').slice(0, 2).join('/')}, ${w.miles} miles`).join('; ') + '.';
+        WEEKLY_MILEAGE.map(w => `week of ${w.week.split('/').slice(0, 2).join('/')}, ${w.miles.toFixed(1)} miles`).join('; ') + '.';
 
       const n = WEEKLY_MILEAGE.length;
 
